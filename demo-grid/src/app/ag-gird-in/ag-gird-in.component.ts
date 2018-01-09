@@ -3,7 +3,7 @@ import { Component, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import "ag-grid-enterprise";
 import {LicenseManager} from "ag-grid-enterprise/main";
-LicenseManager.setLicenseKey("ag-Grid_Evaluation_License_Key_Not_for_Production_100Devs12_March_2018__MTUyMDgxMjgwMDAwMA==06d43d15d1cba6debb06c42556dd9176");
+LicenseManager.setLicenseKey("");
 @Component({
   selector: 'app-ag-gird-in',
   templateUrl: './ag-gird-in.component.html',
