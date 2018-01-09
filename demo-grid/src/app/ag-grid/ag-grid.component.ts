@@ -9,10 +9,12 @@ import {GridOptions} from "ag-grid";
 })
 export class AgGridComponent implements OnInit {
    private gridOptions: GridOptions;
-
-   private columnDefs: any[]
-   private rowData: any[];
+   private gridApi;
+   private gridColumnApi;
+   private columnDefs;
+   private rowData;
    private stateText="hi"
+   private eventText='';
    private paginationPageSize = 5;
    private totalProduct=500;
    private page = 1;
@@ -22,13 +24,25 @@ export class AgGridComponent implements OnInit {
    private filterfield=''
    private filterfieldVal=''
   constructor(private commentsService: CommentsService) {
-    this.gridOptions = <GridOptions>{ enableFilter: true,enableSorting: true,pagination: true};
+    this.columnDefs = [
+
+    ];
+    this.gridOptions = <GridOptions>{ enableFilter: true,enableSorting: true};
+
    }
+   onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+
+    this.stateText =this.stateText+("onGridReady -")
+
+
+  }
   getCommentData(){
-    //this.stateText="Calling Api";
+    this.stateText=this.stateText+"Calling Api -";
     this.commentsService.getCommentData(this.page,this.paginationPageSize,this.col,this.order,this.filterfield,this.filterfieldVal)
       .subscribe(data => {
-      //this.stateText="Got  Data";
+      this.stateText=this.stateText+"Api response -";
 
       /*for(var i=0; i<4; i++)  {
 
@@ -40,8 +54,9 @@ export class AgGridComponent implements OnInit {
 
 
       };
+
       this.columnDefs=columns;
-this.stateText =JSON.stringify("params")//+JSON.stringify(this.gridApi);
+
       this.rowData = data;
 
 
@@ -51,20 +66,13 @@ this.stateText =JSON.stringify("params")//+JSON.stringify(this.gridApi);
         this.stateText =JSON.stringify(error)
       })
   }
-  onGridReady(params) {
 
-
-
-
-  }
-  onPaginationChanged(event){
-    //this.stateText=+"page="+JSON.stringify(event)
-  }
   onFilterChanged(event){
-    //this.stateText=+"filterChanged= "+JSON.stringify(event)
+
+    this.eventText=+"filterChanged= "+JSON.stringify(event)
   }
   onSortChanged(event){
-    //this.stateText=+"sortChanged = "+JSON.stringify(event)
+    this.eventText=+"sortChanged = "+JSON.stringify(event)
   }
   ngOnInit() {
     this.getCommentData()
