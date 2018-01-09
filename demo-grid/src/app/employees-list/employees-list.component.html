@@ -1,0 +1,18 @@
+{{stateText}} <br>
+<input type="button" value="clickme" />
+<kendo-grid
+          [data]="gridView"
+          [pageSize]="pageSize"
+          [skip]="skip"
+          [pageable]="true"
+          [height]="400"
+          [filterable]="true"
+          (dataStateChange)="dataStateChange($event)"
+          (pageChange)="pageChange($event)"
+          [sortable]="{
+            allowUnsort: allowUnsort
+            }"
+          [sort]="sort"
+          (sortChange)="sortChange($event)"
+        >
+      </kendo-grid>
