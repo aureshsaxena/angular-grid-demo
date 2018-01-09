@@ -13,7 +13,8 @@ import { KendoComponent } from './kendo/kendo.component';
 import { AgGridComponent } from './ag-grid/ag-grid.component';
 //import {AgGridModule} from "ag-grid-angular/main";
 import { AgGridModule } from "ag-grid-angular";
-import { FormsModule } from "@angular/forms"; // <-- NgModel lives here
+import { FormsModule } from "@angular/forms";
+import { AgGirdInComponent } from './ag-gird-in/ag-gird-in.component'; // <-- NgModel lives here
 
 
 
@@ -22,7 +23,8 @@ import { FormsModule } from "@angular/forms"; // <-- NgModel lives here
     AppComponent,
     EmployeesListComponent,
     KendoComponent,
-    AgGridComponent
+    AgGridComponent,
+    AgGirdInComponent
   ],
   imports: [
     BrowserModule,

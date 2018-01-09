@@ -8,8 +8,7 @@
                  [columnDefs]="columnDefs"
                  [gridOptions]="gridOptions"
                  (gridReady)="onGridReady($event)"
-                 [paginationPageSize]="paginationPageSize"
-                 (paginationChanged)="onPaginationChanged($event)"
+                 [enableSorting]="true"
                   (filterChanged)="onFilterChanged($event)"
                    (sortChanged)="onSortChanged($event)">
 </ag-grid-angular>
