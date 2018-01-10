@@ -152,8 +152,8 @@ export class AgGirdInComponent {
         });*/
         var dataSource = {
           rowCount: null,
-          getRows: function(params) {
-            console.log("asking for " + params.startRow + " to " + params.endRow);
+          getRows: (params)=> {
+            //alert("asking for " + params.startRow + " to " + params.endRow);
             setTimeout(function() {
               var dataAfterSortingAndFiltering = sortAndFilter(data, params.sortModel, params.filterModel);
               var rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);

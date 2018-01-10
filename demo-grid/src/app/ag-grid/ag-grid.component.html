@@ -4,6 +4,8 @@
 {{ eventText }}
 <ag-grid-angular style="width: 100%; height: 315px;"
                  class="ag-fresh"
+                 [floatingFilter]="true"
+                 [enableFilter]="true"
                  [rowData]="rowData"
                  [columnDefs]="columnDefs"
                  [gridOptions]="gridOptions"

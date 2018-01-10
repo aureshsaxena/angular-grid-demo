@@ -14,7 +14,8 @@ import { AgGridComponent } from './ag-grid/ag-grid.component';
 //import {AgGridModule} from "ag-grid-angular/main";
 import { AgGridModule } from "ag-grid-angular";
 import { FormsModule } from "@angular/forms";
-import { AgGirdInComponent } from './ag-gird-in/ag-gird-in.component'; // <-- NgModel lives here
+import { AgGirdInComponent } from './ag-gird-in/ag-gird-in.component';
+import { Aggridv2Component } from './aggridv2/aggridv2.component'; // <-- NgModel lives here
 
 
 
@@ -24,7 +25,8 @@ import { AgGirdInComponent } from './ag-gird-in/ag-gird-in.component'; // <-- Ng
     EmployeesListComponent,
     KendoComponent,
     AgGridComponent,
-    AgGirdInComponent
+    AgGirdInComponent,
+    Aggridv2Component
   ],
   imports: [
     BrowserModule,
