@@ -23,11 +23,10 @@ export class Aggridv2Component {
   private infiniteInitialRowCount;
   private maxBlocksInCache;
   private getRowNodeId;
-  private components;
+
   private cacheBlockSize;
   private totalProduct=500;
   private page = 1;
-  private skip=0;
   private col='';
   private order="";
   private filterfield=''
@@ -52,7 +51,25 @@ export class Aggridv2Component {
     };
 
   }
-  public getCommentData(params){
+  getColumnInfo(){
+    this.commentsService.getCommentData(this.page,this.paginationPageSize,this.col,this.order,this.filterfield,this.filterfieldVal)
+      .subscribe(data => {
+      this.stetxt=this.stetxt+"Set Columns response -";
+      let columnName=Object.keys(data[0])
+      let columns=[];
+      for(let i=0; i<columnName.length;i++) {
+        if(columnName[i]=="email"){
+          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],filter: "text",sortingOrder: ["desc", "asc"]});
+        }else{
+          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],suppressFilter: true,sortingOrder: ["desc", "asc"]});
+        }
+
+      };
+
+      this.columnDefs=columns;
+  })
+}
+   getCommentData(params){
     this.stetxt=this.stetxt+"Api Call -";
     this.page= (params.startRow/this.paginationPageSize)+1
     if((params.sortModel).length){
@@ -68,18 +85,8 @@ export class Aggridv2Component {
     this.commentsService.getCommentData(this.page,this.paginationPageSize,this.col,this.order,this.filterfield,this.filterfieldVal)
       .subscribe(data => {
       this.stetxt=this.stetxt+"Api response -";
-      let columnName=Object.keys(data[0])
-      let columns=[];
-      for(let i=0; i<columnName.length;i++) {
-        if(columnName[i]=="email"){
-          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],filter: "text"});
-        }else{
-          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],suppressFilter: true});
-        }
 
-      };
       this.stetxt=JSON.stringify(params)
-      this.columnDefs=columns;
       let rowsThisPage=data;
       //{"startRow":0,"endRow":100,"sortModel":[{"colId":"id","sort":"asc"}],"filterModel":{}}
       var lastRow = -1;
@@ -96,6 +103,7 @@ export class Aggridv2Component {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.stetxt=this.stetxt+"onGridReady -";
+    this.getColumnInfo();
         var dataSource = {
           rowCount: null,
           getRows: (params)=> {
