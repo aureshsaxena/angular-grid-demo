@@ -86,7 +86,7 @@ export class Aggridv2Component {
       .subscribe(data => {
       this.stetxt=this.stetxt+"Api response -";
 
-      this.stetxt=JSON.stringify(params)
+      //this.stetxt=JSON.stringify(params)
       let rowsThisPage=data;
       //{"startRow":0,"endRow":100,"sortModel":[{"colId":"id","sort":"asc"}],"filterModel":{}}
       var lastRow = -1;
@@ -94,10 +94,17 @@ export class Aggridv2Component {
         lastRow = this.totalProduct;
       }
       params.successCallback(rowsThisPage, lastRow);
+      let savedState = localStorage.getItem('savedState')
+      if(typeof savedState != null)
+      this.gridColumnApi.setColumnState(JSON.parse(savedState));
       } , error => {
         this.stetxt =JSON.stringify(error)
          error
       })
+  }
+  onColumnVisible(params){
+    let savedState = this.gridColumnApi.getColumnState();
+    localStorage.setItem('savedState', JSON.stringify(savedState));
   }
   onGridReady(params) {
     this.gridApi = params.api;

@@ -26,6 +26,6 @@
     [infiniteInitialRowCount]="infiniteInitialRowCount"
     [maxBlocksInCache]="maxBlocksInCache"
     [getRowNodeId]="getRowNodeId"
-
+    (columnVisible)="onColumnVisible($event)"
     (gridReady)="onGridReady($event)"
     ></ag-grid-angular>
