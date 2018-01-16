@@ -1,6 +1,8 @@
 //import { Component, OnInit } from '@angular/core';
 import { Component, ViewChild } from "@angular/core";
 import { CommentsService } from '../comments.service';
+import { ImageTemplateComponent } from '../image-template/image-template.component';
+import { EmailTemplateComponent } from '../email-template/email-template.component';
 import "ag-grid-enterprise";
 import {LicenseManager} from "ag-grid-enterprise/main";
 //LicenseManager.setLicenseKey();
@@ -31,7 +33,7 @@ export class Aggridv2Component {
   private order="";
   private filterfield=''
   private filterfieldVal=''
-
+  private rowHeight="100"
   private stetxts;
 
   constructor(private commentsService: CommentsService) {
@@ -59,13 +61,13 @@ export class Aggridv2Component {
       let columns=[];
       for(let i=0; i<columnName.length;i++) {
         if(columnName[i]=="email"){
-          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],filter: "text",sortingOrder: ["desc", "asc"]});
+          columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],filter: "text",sortingOrder: ["desc", "asc"],cellRendererFramework: EmailTemplateComponent});
         }else{
           columns.push({headerName: columnName[i].toUpperCase(), field: columnName[i],suppressFilter: true,sortingOrder: ["desc", "asc"]});
         }
 
       };
-
+      columns.push({headerName: "Profile Pic",height:100,field: "profilepic", suppressFilter: true,cellRendererFramework: ImageTemplateComponent});
       this.columnDefs=columns;
   })
 }
@@ -85,7 +87,11 @@ export class Aggridv2Component {
     this.commentsService.getCommentData(this.page,this.paginationPageSize,this.col,this.order,this.filterfield,this.filterfieldVal)
       .subscribe(data => {
       this.stetxt=this.stetxt+"Api response -";
-
+      this.stetxt=JSON.stringify(data.length)
+      for(let i =0; i<data.length;i++){
+        data[i]['profilepic']="/assets/Pic.jpg";
+      }
+      this.stetxt=JSON.stringify(data)
       //this.stetxt=JSON.stringify(params)
       let rowsThisPage=data;
       //{"startRow":0,"endRow":100,"sortModel":[{"colId":"id","sort":"asc"}],"filterModel":{}}

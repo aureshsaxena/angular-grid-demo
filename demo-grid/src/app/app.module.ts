@@ -15,7 +15,9 @@ import { AgGridComponent } from './ag-grid/ag-grid.component';
 import { AgGridModule } from "ag-grid-angular";
 import { FormsModule } from "@angular/forms";
 import { AgGirdInComponent } from './ag-gird-in/ag-gird-in.component';
-import { Aggridv2Component } from './aggridv2/aggridv2.component'; // <-- NgModel lives here
+import { Aggridv2Component } from './aggridv2/aggridv2.component';
+import { ImageTemplateComponent } from './image-template/image-template.component';
+import { EmailTemplateComponent } from './email-template/email-template.component'; // <-- NgModel lives here
 
 
 
@@ -26,7 +28,9 @@ import { Aggridv2Component } from './aggridv2/aggridv2.component'; // <-- NgMode
     KendoComponent,
     AgGridComponent,
     AgGirdInComponent,
-    Aggridv2Component
+    Aggridv2Component,
+    ImageTemplateComponent,
+    EmailTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ import { Aggridv2Component } from './aggridv2/aggridv2.component'; // <-- NgMode
     BrowserAnimationsModule,
     GridModule,
     AppRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([ImageTemplateComponent,EmailTemplateComponent])
   ],
   providers: [ CommentsService],
   bootstrap: [AppComponent]
